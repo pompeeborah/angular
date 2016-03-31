@@ -1,0 +1,30 @@
+LIST HTML
+<div ng-controller="ListCtrl">
+<h2>Angular.js JSON Fetching Example</h2>
+<button ng-click="clearStorage()">Clear Storage</button><br>
+
+
+Search : <input type=text ng-model="search" placeholder="Search By Name"/>
+
+
+    <table class="table table-striped" width="60%">
+      <tr>
+        <th>Code</th>
+		<th>Country</th>
+        <th>Population</th>
+        <th>&nbsp;</th>
+      </tr>
+      <tr ng-repeat="country in countries | filter:search" style="margin:20px;">
+        <td>{{country.code}}</td>
+		<td>{{country.name}}</td>
+        <td>{{country.population}}</td>
+        <td colspan="3">
+            <a href="#/" ng-click="edit()"> Edit </a>
+            
+            <a href="#/edit" > Edit1 </a>
+             <button ng-click="edit($index)">edit</button>
+           
+        </td>      
+    </table>
+</div>
+<input type="text" id="country_population" value={{current.population}}>
