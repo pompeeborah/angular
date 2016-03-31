@@ -1,1 +1,122 @@
-hh
+<html >
+  <head>
+    <meta charset="utf-8">
+    <title>Angular.js JSON Fetching Example</title>
+    <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+<script src="
+https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.js
+ "></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.js "></script>
+    
+  </head>
+  <body ng-app="countryApp" >
+      
+      <ng-view></ng-view>
+      
+	
+      
+      <script>
+	  
+	  
+	  
+      var countryApp = angular.module('countryApp', ['ngRoute']);
+	  
+	  
+	  countryApp.factory('CommonData', function(){
+			var CommonData = {};
+	        CommonData.datareturn = {x:'',y:''};
+			CommonData.setData = function(data){
+				CommonData.datareturn.x = data;
+			}
+			
+			CommonData.setSpecificData = function(data1){
+				CommonData.datareturn.y = data1;
+			} 
+			
+            return CommonData;
+        });
+	  
+	  
+      countryApp.controller('ListCtrl', function ($scope, $http, $location, CommonData){
+		if (!localStorage.data123) {
+			$http.get('countries.json').success(function(data) {
+             $scope.data = CommonData.datareturn;
+			 CommonData.setData(data);
+            
+             $scope.countries = data;
+			 localStorage.setItem("data123", JSON.stringify(data));
+			//$scope.CommonData.x = data;
+        });
+		} else {
+			$scope.countries = JSON.parse(localStorage.getItem("data123"));
+		}
+		
+		$scope.edit = function(index){		
+				//$scope.data = CommonData.datareturn;
+				CommonData.setSpecificData(index);
+                $location.path("/edit");
+				
+				
+				//$location.path("/edit");
+            }   
+
+			$scope.clearStorage = function(){
+				
+				$http.get('countries.json').success(function(data) {
+					 $scope.data = CommonData.datareturn;
+					 CommonData.setData(data);
+					
+					 $scope.countries = data;
+					 localStorage.setItem("data123", JSON.stringify(data));
+					//$scope.CommonData.x = data;
+				});
+			}
+        
+          
+      }); 
+	  
+	  countryApp.controller('EditCtrl1', function ($scope, $http, $location, CommonData){
+       
+            $scope.data = CommonData.datareturn;
+			
+			$scope.data3 = JSON.parse(localStorage.getItem("data123"));
+			
+			$scope.back = function(){
+				localStorage.setItem("data123", JSON.stringify($scope.data3));
+                $location.path("/");
+            }
+            
+          
+      }); 
+
+
+	  
+	  
+		countryApp.controller('EditCtrl', function ($scope, $http, $location, CommonData){
+				
+				
+            });
+
+       
+        countryApp.config(function ($routeProvider) {
+        $routeProvider.when("/", {
+            templateUrl: 'route/list.html',
+            
+        }).when("/edit", {
+            templateUrl: 'route/edit.html',            
+            controller: 'EditCtrl1',
+            //method: 'edit'
+            
+            })
+       })
+        
+        
+          
+          
+          
+        
+        
+    </script>
+  </body>
+</html>
