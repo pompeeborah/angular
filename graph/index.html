@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.css">
+</head>
+<body ng-app="app">
+    
+    
+   <div ng-controller="swipCtrl"> 
+    <div ng-swipe-left="test()">
+      <h1>  test content
+        f
+        g
+        dfgdf
+        g
+        dfgdf
+        g
+        dfg
+        dfg
+        df
+        g
+        df
+        gdf
+        g
+        df
+        g
+        df
+        g
+        
+        dfg
+        df
+        gdf
+        </h1>
+    </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    <div ng-controller="LineCtrl">    
+        <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="true" chart-series="series" accesskey=""  chart-click="onClick" >        
+        </canvas>
+    </div>
+    
+  <div ng-controller="LineCtrl23">    
+       <canvas id="doughnut" class="chart chart-doughnut"
+  chart-data="data" chart-labels="labels">
+      </canvas>        
+    </div>
+    
+    <div ng-controller="PieCtrl">
+        <canvas id="pie" class="chart chart-pie"
+  chart-data="data" chart-labels="labels">
+</canvas> 
+    </div>
+    <div ng-controller="RadarCtrl">        
+        <canvas id="radar" class="chart chart-radar"
+  chart-data="data" chart-labels="labels">
+</canvas> 
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
+     <script src="//cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js"></script></script>
+    
+    
+    <script>
+    
+              angular.module("app", ["chart.js"]).controller("LineCtrl", function ($scope) {
+
+              $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+              $scope.series = ['Series A', 'Series B'];
+              $scope.data = [
+                [65, 59, 80, 81, 56, 55, 40],
+                [28, 48, 40, 19, 86, 27, 90]
+              ];
+              $scope.onClick = function (points, evt) {
+                console.log(points, evt);
+              };
+                  
+                
+                  
+                  
+                  
+            }).controller("LineCtrl23", function ($scope) {
+                  $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
+                    $scope.data = [300, 500, 100];
+                  
+                
+                  
+                  
+                  
+            }).controller("PieCtrl", function ($scope) {
+  $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
+  $scope.data = [300, 500, 100];
+}).controller("RadarCtrl", function ($scope) {
+  $scope.labels =["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"];
+
+  $scope.data = [
+    [65, 59, 90, 81, 56, 55, 40],
+    [28, 48, 40, 19, 96, 27, 100]
+  ];
+}).controller("swipCtrl", function ($scope) {
+                  $scope.test = function(){
+                      
+                      console.log("testing");
+                  };
+  
+});
+        
+        
+        
+       
+     
+   
+    
+    </script>
+    
+//http://jtblin.github.io/angular-chart.js/#bar-chart
+    
+</body>
+</html>
